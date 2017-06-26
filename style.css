@@ -1,0 +1,209 @@
+<style>
+a {
+    color: #fff;
+}
+body {
+background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  background-image: url("img/bg1.jpg");
+}
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  border-color: #cFD;
+}
+td {padding: 1;
+    background-color: #fff;
+}
+th {
+  padding: 1;
+  background-color: #333;
+}
+  .label {
+    border: 1px solid #000;
+  }
+  .table {
+    border-collapse: collapse !important;
+    border-color: #cFD;
+  }
+  .table td{
+    background-color: #fff !important;
+  }
+
+  .table th {
+    background-color: #333 !important;
+  }
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #ddd !important;
+  }
+.background_wall_css{
+		margin: 50px auto;
+}
+.headmenu{
+  color: #BBB;
+}
+.canclelist{
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: auto; /* Add vertical scrollbar */
+}
+
+.list_order_css{
+	height: 550px;
+	width: 500px;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: auto; /* Add vertical scrollbar */
+}
+
+.button{
+		display:inline-block;
+		overflow-x: hidden; /* Hide horizontal scrollbar */
+		overflow-y: hidden; /* Add vertical scrollbar */
+		padding: 5px 5px; 
+		border: 0px solid #333; 
+		border-radius:20px;
+}
+
+.button_h:hover {
+  background: #06D85F;
+}
+.button_e {
+  width:100px;
+  height:100px; 
+  background: #CCAA33;
+}
+.button_ex_h {
+  width:325px;
+  height:50px; 
+  background: #000033;
+}
+.button_ex {
+  width:325px;
+  height:50px; 
+  background: #CCAA33;
+}
+.button_ee {
+  width:100px;
+  height:100px; 
+  background: #FFFF00;
+}
+.color_blue{
+		width:100px;
+		height:100px; 
+		background: #3333FF;
+}
+.color_red{
+		width:100px;
+		height:100px; 
+		background: #FF3333;
+}
+.color_green{
+		width:100px;
+		height:100px; 
+		background: #33FF33;
+}
+.alcohol{
+		width:100px;
+		height:100px; 
+		background: #7777FF;
+}
+.order{
+		width:50px;
+		height:50px; 
+		background: #7777FF;
+}
+.refresh{
+		width:50px;
+		height:25px; 
+		background: #FF7777;
+}
+.cancle{
+    width:50px;
+    height:25px; 
+    background: #FF0000;
+}
+.sle{ 
+    width:50px;
+    background: #FF99DD;
+}
+.sle_e{ 
+    width:50px;
+    background: #444444;
+}
+.notcancle{
+    width:50px;
+    height:25px; 
+    background: #00FF00;
+}
+.cancle_e{
+    width:50px;
+    height:25px; 
+    background: #555555;
+}
+.made{
+    width:200px;
+    height:50px; 
+    background: #FF77FF;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+.popup {
+  margin: 250px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 100%;
+  }
+}
+.contt{
+	padding:15px;
+}
+
+</style>
