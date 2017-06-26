@@ -2,7 +2,7 @@
 <script>
 $(document).ready(function () {
     setInterval(function() {
-        $.get("viewlist.php", function (result) {
+        $.get("viewlist_m.php", function (result) {
             $('#list_orderid').html(result);
         });
     },500);
@@ -16,10 +16,30 @@ include('database/db.php');
 if(@$_GET['number']){
 $number=@$_GET['number'];
 }else{
-$number=-1;
+$number='';
 }
 
-if(@$_GET['make']){
+
+if(@$_GET['sle']){
+	$sle=@$_GET['sle'];
+}else{
+$sle='';
+}
+if(@$_GET['XY']){
+        $view_query="update shop set status=3 where number=".@$_GET['X'];  
+        $run=mysqli_query($db,$view_query); 
+        if (!$run) {
+            printf("Error: %s\n", mysqli_error($db));
+        }
+}
+else if(@$_GET['make'] and @$_GET['status']==4){
+        $view_query="update shop set status=5 where number=$number";  
+        $run=mysqli_query($db,$view_query); 
+        if (!$run) {
+            printf("Error: %s\n", mysqli_error($db));
+        }
+}
+else if(@$_GET['make'] and @$_GET['status']==1){
         $view_query="update shop set status=2 where number=$number";  
         $run=mysqli_query($db,$view_query); 
         if (!$run) {
@@ -33,7 +53,16 @@ else if(@$_GET['finish']){
             printf("Error: %s\n", mysqli_error($db));
         }
 }
-        $view_query="select min(number),color,alcohol from shop where status=1 or status=2";  
+
+		$view_users_query="SELECT COUNT(number) from shop WHERE status = 4 or status = 5";//select query for viewing users.  
+		$run=mysqli_query($db,$view_users_query);//here run the sql query.  
+		while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.  
+		        {
+		        	$ex=$row[0];
+		        }
+
+if(@$_GET['sle']){
+        $view_query="select min(number),color,alcohol,status  from shop where number=$sle";  
         $run=mysqli_query($db,$view_query); 
         if (!$run) {
             printf("Error: %s\n", mysqli_error($db));
@@ -42,8 +71,44 @@ else if(@$_GET['finish']){
         		$number=$row[0];
         		$color=$row[1];
         		$alcohol=$row[2];
+        		$status=$row[3];
+}
+}
+else if($ex or @$_GET['satatus']==5){
+        $view_query="select min(number),color,alcohol,status  from shop where status=4 or status=5";  
+        $run=mysqli_query($db,$view_query); 
+        if (!$run) {
+            printf("Error: %s\n", mysqli_error($db));
+        }
+        	while($row=mysqli_fetch_array($run)){
+        		$number=$row[0];
+        		$color=$row[1];
+        		$alcohol=$row[2];
+        		$status=$row[3];
         	}
+}else{
+        $view_query="select min(number),color,alcohol,status from shop where status=1 or status=2 ";  
+        $run=mysqli_query($db,$view_query); 
+        if (!$run) {
+            printf("Error: %s\n", mysqli_error($db));
+        }
+        	while($row=mysqli_fetch_array($run)){
+        		$number=$row[0];
+        		$color=$row[1];
+        		$alcohol=$row[2];
+        		$status=$row[3];
+        	}
+}
 
+ if(@$_GET['XY']){
+
+        $view_query="update shop set status=3 where number=".@$_GET['X'];  
+        $run=mysqli_query($db,$view_query); 
+        if (!$run) {
+            printf("Error: %s\n", mysqli_error($db));
+        }
+
+}
 	echo"<div class='background_wall_css'>";
 		echo"<div class='list_menu_css'>";
 		echo"<center>";
@@ -98,8 +163,8 @@ else if(@$_GET['finish']){
 					echo"<font color=#000><center>No.$number</center></font>";
 					echo"</td>";
 					echo"<td colspan=2 width='50'>";
-						if($number!=-1){
-							echo "<center><a class='made_a' id='made_button' href='make.php?number=$number&make=y'>";
+						if($number!=""){
+							echo "<center><a class='made_a' id='made_button' href='make.php?number=$number&make=y&status=$status&sle=$sle'>";
 							}else{
 					 		echo "<center><a class='made_a' id='made_button'>";
 					 	}
@@ -135,4 +200,24 @@ else if(@$_GET['finish']){
 		echo"</div>";
 	echo"</div>";
 	echo"</div>";
+
+	echo"<div id='popup2' class='overlay'>";
+		echo"<div class='popup'>";
+		echo"<a class='close' href='index.php?menu=2'>&times;</a>";
+		echo"<div class='content contt' name='display'>";
+		echo"<center>";
+			echo"Do you really want to cancel it?<br><br>";
+					echo "<center><a class='refresh_a' id='refresh_button' href='index.php?menu=2&XY=1&X=".@$_GET['X']."'>";
+					echo "<div class='notcancle button button_h' id='refresh'>Yes";
+					echo "</div>";				
+					echo "</a>";
+					echo "<a class='refresh_a' id='refresh_button' href='index.php?menu=2'>";
+					echo "<div class='cancle button button_h' id='refresh'>No";
+					echo "</div>";				
+					echo"</a></center>";					
+		echo"</center>";
+		echo"</div>";
+		echo"</div>";
+	echo"</div>";
+
 ?>

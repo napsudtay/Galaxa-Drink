@@ -15,7 +15,7 @@ include('style.css');
         <thead>  
   
         <tr>  
-			<th width="50"><div align="center"><font color=#AAAAAA>No.</div></font></th> 
+            <th width="50"><div align="center"><font color=#AAAAAA>No.</div></font></th> 
             <th width="200"><div align="center"><font color=#AAAAAA>Color</div></font></th>  
             <th width="200"><div align="center"><font color=#AAAAAA>Alcohol</div></font></th> 
             <th width="200"><div align="center"><font color=#AAAAAA>Price</div></font></th>
@@ -25,7 +25,7 @@ include('style.css');
         </thead>  
   <?php  
         include("database/db.php");  
-        $view_users_query="select * from shop ORDER by number DESC ";//select query for viewing users.  
+        $view_users_query="select * from shop ORDER by number DESC";//select query for viewing users.  
         $run=mysqli_query($db,$view_users_query);//here run the sql query.  
 
         while($row=mysqli_fetch_array($run))//while look to fetch the result and store in a array $row.  
@@ -37,7 +37,18 @@ include('style.css');
             $status=$row[4];   
         ?>  
         <tr>  
-			<td width="50"><div align="center"><?php echo "<font color=000000>$number</font>";  ?></div></td>
+            <td width="50"><div align="center">
+
+    <?php 
+           if($number!=@$_GET['sle'] and $status !=0 and $status!= 3){ 
+               echo "<center><a class='refresh_a' id='cancle_button' href='?menu=2&sle=".$number."'>";
+                echo "<div class='sle button button_h' id='refresh'>".$number;
+         }else{ 
+               echo "<center><a class='refresh_a'>";
+                echo "<div class='sle_e button' id='refresh'>".$number;     
+          } ?>                
+
+            </div></td>
             <td width="200"><div align="center"><?php echo "<b><font color=$color>$color</font></b>";  ?></div></td>  
             <td width="200"><div align="center"><?php echo "<font color=000000>$alcohol</font>";  ?></div></td>
             <td width="200"><div align="center"><?php echo "<font color=000000>".number_format($price)." Bath</font>";  ?></div></td>
@@ -49,13 +60,15 @@ include('style.css');
             <td width="10"><div align="center"><b><font color=black>Cancle</font></b></div></td>
        <?php    }else if($status==4){   ?>
             <td width="10"><div align="center"><b><font color=Orange>Exigent</font></b></div></td>
+       <?php    }else if($status==5){   ?>
+            <td width="10"><div align="center"><b><font color=Yellow>Making Ext</font></b></div></td>
        <?php    }else{   ?>  
             <td width="10"><div align="center"><b><font color=green>Finish</font></b></div></td>
        <?php     }  ?> 
 
             <td width="10"><div align="center"><b><font color=green>
-<?php            if($status==1 or $status==2 or $status==4){ ?>
-                <center><a class='refresh_a' id='cancle_button' href='?menu=1&X=<?php echo $number;?>#popup2'>
+<?php            if($status==1 or $status==2 or $status==4 or $status==5){ ?>
+                <center><a class='refresh_a' id='cancle_button' href='?menu=2&X=<?php echo $number;?>#popup2'>
                 <div class='cancle button button_h' id='refresh'>Cancle
 <?php             }else{ ?>
                 <center><a class='refresh_a' id='cancle_button'>
@@ -66,7 +79,7 @@ include('style.css');
 
             </font></b></div></td>
 
-        </tr>  	
+        </tr>   
      <?php     }  ?>
            </table> </center> 
     </div>
@@ -74,5 +87,5 @@ include('style.css');
     </body>
  </html>
 <?php
-	mysqli_close($db);
+    mysqli_close($db);
 ?>

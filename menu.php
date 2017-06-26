@@ -31,4 +31,5 @@
   <a href="?menu=1">Order</a>
   <a href="?menu=2">Make</a>
   <a href="?menu=3">Summary</a>
+  <img src="img\GalaxaLogo.png" ALIGN = "RIGHT" style="width:width;height:45px; padding: 2px 2px;">
 </div>
